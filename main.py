@@ -34,12 +34,5 @@ show_grid(grid, size)
 #1
 explore_islands(grid, size=size)
 get_thing(grid, size)
-#2
-reset(grid,size)
-explore_islands(grid, size=size)
-get_thing(grid, size)
-#3
-reset(grid,size)
-explore_islands(grid, size=size)
-get_thing(grid, size)
+
 show_grid(grid, size=size)  

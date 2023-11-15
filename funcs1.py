@@ -56,15 +56,9 @@ def extend_island(node, grid, index):
     grid[index] = node
     node.size+=1
     node.locations.append(index)
-    print(node.possible_locations)
     node.possible_locations.remove(index)
     node.finish = node.target_size==node.size
     if node.finish:
-        print("finish")
-        print(node.target_size)
-        print(node.size)
-        print(node.possible_locations)
-        print(node.true_index)
         for loc in node.possible_locations:
             grid[loc].possible_islands.remove(node.true_index)
         node.possible_locations = []

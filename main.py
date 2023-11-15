@@ -28,17 +28,18 @@ origin_grid[14] = 3
 origin_grid[18] = 4
 origin_grid[20] = 2
 
-show_grid(origin_grid, size=size)
 grid = get_local_grid(origin_grid)
 
+show_grid(grid, size)
+#1
 explore_islands(grid, size=size)
 get_thing(grid, size)
-
-#show grid
-for i in range(size*size):
-    square_index = i
-    print(square_index)
-    if grid[square_index].isisland:
-        print(f"island: {grid[square_index].possible_locations}")
-    else:
-        print(grid[square_index].possible_islands)
+#2
+reset(grid,size)
+explore_islands(grid, size=size)
+get_thing(grid, size)
+#3
+reset(grid,size)
+explore_islands(grid, size=size)
+get_thing(grid, size)
+show_grid(grid, size=size)  

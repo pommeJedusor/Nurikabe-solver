@@ -11,6 +11,7 @@ class Node:
         self.target_size = target_size
         self.size = 1
         self.locations = [true_index]
+        self.extern_locations = []
         self.possible_locations = []
         self.finish = target_size==self.size
         self.isisland = True

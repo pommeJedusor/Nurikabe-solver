@@ -113,7 +113,7 @@ def get_must_squares(node, grid, index, size):
         
 def explore_islands(grid, size):
     for i in range(size*size):
-        if grid[i].isisland:
+        if grid[i].isisland and not i in grid[i].extern_locations:
             get_possible_squares(grid[i],grid, i, size, first_exe=True)
     for i in range(size*size):
         if grid[i].isisland:

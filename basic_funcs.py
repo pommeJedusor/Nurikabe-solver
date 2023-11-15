@@ -1,10 +1,18 @@
 from datas_struct import *
 
 def show_grid(grid, size):
+    print("start")
     for y in range(size):
         for x in range(size):
-            print(grid[y*size+x],end="")
+            element = grid[y*size+x]
+            if element.isisland:
+                print(element.target_size,end="")
+            elif element.possible_islands:
+                print("0",end="")
+            else:
+                print(" ",end="")
         print("")
+    print("-end-")
 
 def get_origin_grid(size):
     origin_grid = []

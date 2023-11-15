@@ -6,6 +6,39 @@ pour chaque case vide de 2x2:
         ajouter la case 2x2 dans les must_pass_by
 """
 from datas_struct import *
+from funcs1 import *
+
+def copy_grid(grid):
+    return [i for i in grid]
+
+def find_path(grid, index, island_index, size, path=[], all_paths=[], deep=0):
+    print("path")
+    print(path)
+    print(all_paths)
+    deepmax = grid[island_index].target_size - grid[island_index].size
+    print(f"index: {index}\nisland index: {island_index}\ndeep: {deep}\ndeepmax: {deepmax}")
+    if index==island_index:
+        all_paths.append(copy_grid(path))
+        return all_paths
+    if deep>=deepmax or index in path:
+        return all_paths
+
+    path.append(index)
+    #up
+    if index>=size and location_available(grid[island_index],grid, index-size, size):
+        find_path(grid, index-size, island_index, size, path, all_paths, deep+1)
+    #left
+    if index%size and location_available(grid[island_index],grid, index-1, size):
+        find_path(grid, index-1, island_index, size, path, all_paths, deep+1)
+    #right
+    if (index+1)%size and location_available(grid[island_index],grid, index+1, size):
+        find_path(grid, index+1, island_index, size, path, all_paths, deep+1)
+    #down
+    if index<size*size-size and location_available(grid[island_index],grid, index+size, size):
+        find_path(grid, index+size, island_index, size, path, all_paths, deep+1)
+
+    path.remove(index)
+    return all_paths
 
 def get_thing(grid, size):
     for y in range(size-1):
@@ -50,3 +83,9 @@ def get_thing(grid, size):
             print("island")
             print(island)
             print(index)
+            all_paths = find_path(grid, index, island, size)
+            if len(all_paths)==1:
+                all_paths[0].reverse()
+                for index in all_paths[0]:
+                    if not grid[index].isisland:
+                        extend_island(grid[island], grid, index)

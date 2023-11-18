@@ -1,0 +1,24 @@
+étape 1
+trouver pour chaque île toutes les configurations possible via un algo DFS qui regarde aussi les coups des îles précédentes
+ex:
+    île de taille 3 en 00
+    1er coup 01:
+        1er coup  02
+        2ème coup 10
+        3ème coup 11
+    2ème coup 10:
+        1er coup  01
+        2ème coup 20
+        3ème coup 11
+    il n'y a pas 6 possibilitées mais 5 car 01 10 et 10 01 sont les même
+    y auras moyen d'optimiser avec un algo de tri pour vérifier si le path a déja été éxploré
+étape 2:
+    trouver les cases qui sont dans tous les path de l'île pour les inclure sur la grid
+étape 3:
+    regarder les cases 2x2 vides qui n'ont qu'une île pouvant y accéder:
+        retirer les paths de l'île qui ne passe pas par la case 2x2 vide
+étape 4:
+    vérifier pour toutes les cases vides qui peuvent n'être accéder que par une île
+    si elle peuvent accéder à toutes les cases assuréments vides
+étape 5:
+    recommencer tant que la grid diffère à chaque itération

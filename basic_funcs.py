@@ -1,35 +1,26 @@
 from datas_struct import *
 
-def show_grid(grid, size):
-    print("start")
-    for y in range(size):
-        for x in range(size):
-            element = grid[y*size+x]
-            if element.isisland:
-                print(element.target_size,end="")
-            elif element.possible_islands:
-                print("0",end="")
-            else:
-                print(" ",end="")
-        print("")
-    print("-end-")
+def copy_grid(grid):return [i for i in grid]
 
-def get_origin_grid(size):
-    origin_grid = []
-    for i in range(size):
-        for char in input():
-            if char==".":
-                origin_grid.append(0)
-            elif char.isdigit():
-                origin_grid.append(int(char))
-    return origin_grid
-
-def get_local_grid(origin_grid):
+def get_local_grid(old_grid):
     grid = []
-    for i in range(len(origin_grid)):
-        element = origin_grid[i]
-        if element:
-            grid.append(Node(i, element))
-        else:
+    for i in range(len(old_grid)):
+        if old_grid[i]==0:
             grid.append(VoidSquare())
+        else:
+            grid.append(Island(i, old_grid[i]))
     return grid
+
+def show_grid(grid, size):
+    print("-"*round((size-5)/2)+"start"+"-"*round((size-5)/2))
+    for i in range(size):
+        for j in range(size):
+            square = grid[i*size+j]
+            if square.color == 2:
+                print(end=" ")
+            elif square.isisland():
+                print(square.target_size,end="")
+            else:
+                print(end="0")
+        print()
+    print("-"*round((size-3)/2)+"end"+"-"*round((size-3)/2))

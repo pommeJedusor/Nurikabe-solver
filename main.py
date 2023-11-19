@@ -17,4 +17,5 @@ for i in range(len(grid)):
     el = grid[i]
     if el.isisland() and el.origin_index==i:
         print(i)
-        print(el.paths)
+        for path in el.paths:
+            print(path)

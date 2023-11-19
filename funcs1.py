@@ -1,17 +1,12 @@
 from basic_funcs import *
 
 def check_path(path, all_paths):
-    print("check path")
-    print(path)
-    print(all_paths)
     for all_p in all_paths:
         for i in range(len(path)):
             if path[i]!=all_p[i]:
                 break
         else:
-            print(True)
             return True
-    print(False)
     return False
 
 def get_possible_moves(grid, size, index, possible_moves, origin_index):
@@ -36,12 +31,6 @@ def get_possible_moves(grid, size, index, possible_moves, origin_index):
 
 
 def get_all_paths(grid, size, index, origin_index, path, possible_moves, deep=0):
-    print("possible_moves")
-    print(possible_moves)
-    print("index:")
-    print(index)
-    print("all paths")
-    print(grid[origin_index].paths)
     #insert index in path
     if index in path:
         return grid[origin_index].paths
@@ -51,8 +40,6 @@ def get_all_paths(grid, size, index, origin_index, path, possible_moves, deep=0)
             break
     else:
         path.append(index)
-    print("path")
-    print(path)
     
     if check_path(path, grid[origin_index].paths):
         path.remove(index)
@@ -80,3 +67,20 @@ def get_all_paths_islands(grid, size):
     for i in range(len(grid)):
         if grid[i].isisland() and grid[i].origin_index==i:
             grid[i].paths = get_all_paths(grid, size, i, i, [], [])
+
+def get_must_squares(grid, size):
+    for i in range(size*size):
+        if not grid[i].isisland():
+            continue
+        optionnal_squares = []
+        must_squares = grid[i].paths[0]
+        for path in grid[i].paths[1:]:
+            squares = []
+            for index in path:
+                if index in optionnal_squares or not index in must_squares:
+                    continue
+                else:
+                    squares.append(index)
+            must_squares = squares
+
+        grid[i].must_squares = must_squares

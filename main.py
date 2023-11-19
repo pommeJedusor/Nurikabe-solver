@@ -19,3 +19,5 @@ for i in range(len(grid)):
         print(i)
         for path in el.paths:
             print(path)
+
+get_must_squares(grid, size)
